@@ -1,3 +1,4 @@
+@import "tailwindcss";
 /* Full height setup */
 body,
 html {
@@ -174,4 +175,18 @@ html {
 
 .hospital-card a:hover {
   text-decoration: underline;
+}
+
+#recommendButton {
+  background: #6A5ACD;
+  color: white;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+#recommendButton:hover {
+  background: #9370DB;
+  transform: scale(1.1);
 }
