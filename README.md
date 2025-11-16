@@ -1,45 +1,94 @@
-# AIES CCP Project
+# Hospital Recommendation Chatbot
 
-🏥 AI-Based Hospital Recommendation System
-This project is a smart hospital recommendation system developed in Python. It allows users to search for hospitals based on medical specialization, city, and fee range. The system uses the FuzzyWuzzy library to match user queries even when there are spelling mistakes or partial inputs.
+A project that uses Natural Language Processing to help users find hospitals based on their medical needs, location, and budget.
 
-🔍 Key Features
-Fuzzy Matching: Handles typos and approximate inputs in specialization names.
-City Filter: Narrows down search results based on the user’s preferred city.
-Fee Range Filter: Lets users search for hospitals within a specified consultation fee range.
-Intelligent Suggestions: Returns best-matching hospitals even if exact terms are not entered.
-
-💻 Technologies Used
-Python 3
-FuzzyWuzzy (for fuzzy string matching)
-Python standard libraries
-
-📂 How It Works
-The user enters a specialization (e.g., "cardiollogist" instead of "cardiologist").
-The system searches for exact matches first.
-If no exact match is found, the system uses fuzzy matching to find similar specializations.
-It then filters hospitals based on city and fee range if provided.
-The final result is a list of matching hospitals shown with details.
+## Team Members
+- Syeda Shinza Wasif (CT-22063)
+- Areeba Batool (CT-22059)
+- Asifa Siraj (CT-22070)
 
 
-🧠 Concepts Demonstrated
-Python dictionaries for structured hospital data
-String similarity with FuzzyWuzzy
-Conditional filtering
-Modular code using functions
+## Overview
+This chatbot understands natural language queries and recommends suitable hospitals. Users can type or speak their requirements, and the system provides relevant results with voice responses.
 
-📽️ YouTube Video Link
-https://youtu.be/iUKzhC4drAk?si=EJ9J0QnQCffUWCM8
+**Example Queries:**
+- "heart specialist in karachi"
+- "dentist under 5000"
+- "eye doctor lahore 3000-5000"
 
-📎 Project Files
-app.py – Main file handling user queries and filtering
-beautifulSoup.py - For Web Scraping
-hospital.json – Contains sample hospital data
-chatbot.jsx – For frontend handling
+## NLP Techniques Used
 
+### 1. **Tokenization (NLTK)**
+Breaks user queries into words for analysis
+```python
+query_tokens = word_tokenize(query.lower())
+```
 
-🙌 Authors:
-Project Lead - Syeda Shinza Wasif
-Teammate No. 1 – Areeba Batool
-Teammate No. 2 – Asifa Siraj
+### 2. **Named Entity Recognition**
+Extracts cities and specializations from queries
+```python
+def extract_city_from_query(query):
+    # Matches city names from query tokens
+```
+
+### 3. **Pattern Matching (Regex)**
+Identifies fee ranges and numbers
+```python
+range_match = re.search(r"(\d+)\s*-\s*(\d+)", query)
+```
+
+### 4. **Fuzzy String Matching**
+Finds hospitals even with spelling mistakes or partial matches
+```python
+fuzzy_results = process.extract(query, specializations, limit=10)
+```
+
+### 5. **Speech Recognition (Wav2Vec 2.0)**
+Converts audio input to text using Facebook's pre-trained model
+```python
+processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-960h")
+```
+
+### 6. **Text-to-Speech**
+Responds with voice output using gTTS and pyttsx3
+
+### 7. **Number Conversion**
+Handles both numeric and word-based inputs
+- "five thousand" → 5000
+- 5000 → "five thousand" (for TTS)
+
+## Tech Stack
+
+**Backend (Flask)**
+- Flask API for handling requests
+- NLTK for tokenization
+- FuzzyWuzzy for fuzzy matching
+- Transformers for speech recognition
+- Beautiful Soup for web scraping hospital data
+
+**Frontend (React)**
+- User interface for chat
+- Audio recording functionality
+- Display hospital results
+
+**Data Collection**
+- Web scraping using Beautiful Soup
+- Hospital data stored in JSON format
+
+## How It Works
+
+1. **User Input** → Query typed or spoken
+2. **NLP Processing** → Extract city, specialization, fee range
+3. **Fuzzy Matching** → Find similar hospitals (70% threshold)
+4. **Filtering** → Apply location and budget filters
+5. **Ranking** → Sort by fees (lowest first)
+6. **Response** → Return results with voice output
+
+## Key Features
+
+- Natural language understanding
+- Voice input/output support
+- Fuzzy search for typos
+- Multi-criteria filtering
+- Real-time results
 
